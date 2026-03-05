@@ -2,6 +2,7 @@ package com.example.list_view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,11 +56,25 @@ public class MainActivity extends AppCompatActivity {
         // 4. Asignar el adaptador al ListView
         listDepartamentos.setAdapter(data);
 
-        // 5. Configurar el evento Click del botón
+        // 5. Configurar el evento Click del botón (setOnClickListener)
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 agregarDepartamento();
+            }
+        });
+
+        // 6. Configurar el evento de click en los elementos de la lista (OnItemClickListener)
+        listDepartamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Obtener el objeto seleccionado usando la posición
+                Departamento seleccionado = listDepartamentosData.get(position);
+
+                // Mostrar Toast con la información
+                Toast.makeText(MainActivity.this, 
+                        "Departamento: " + seleccionado.getNombreDepa() + "\nCódigo: " + seleccionado.getCodigo(), 
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
