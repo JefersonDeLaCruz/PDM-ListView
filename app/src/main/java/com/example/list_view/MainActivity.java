@@ -1,5 +1,6 @@
 package com.example.list_view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etNombreDepa, etCodigo;
     private Button btnAgregar;
+    private Button btnOpenProducts;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+        btnOpenProducts = findViewById(R.id.btnVista);
+
+        btnOpenProducts.setOnClickListener(v -> {
+
+            abrirProductView();
+        });
+
     }
 
     private void agregarDepartamento() {
@@ -115,5 +129,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Por favor completa ambos campos", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void abrirProductView(){
+
+        Intent intent = new Intent(this, MainActivity2.class);
+
+        startActivity(intent);
     }
 }
