@@ -65,16 +65,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // 6. Configurar el evento de click en los elementos de la lista (OnItemClickListener)
-        listDepartamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        listDepartamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                // Obtener el objeto seleccionado usando la posición
+//                Departamento seleccionado = listDepartamentosData.get(position);
+//
+//                // Mostrar Toast con la información
+//                Toast.makeText(MainActivity.this,
+//                        "Departamento: " + seleccionado.getNombreDepa() + "\nCódigo: " + seleccionado.getCodigo(),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        listDepartamentos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Obtener el objeto seleccionado usando la posición
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Departamento seleccionado = listDepartamentosData.get(position);
 
-                // Mostrar Toast con la información
-                Toast.makeText(MainActivity.this, 
-                        "Departamento: " + seleccionado.getNombreDepa() + "\nCódigo: " + seleccionado.getCodigo(), 
+
+                Toast.makeText(MainActivity.this,
+                        "Departamento: " + seleccionado.getNombreDepa() + "\nCódigo: " + seleccionado.getCodigo(),
                         Toast.LENGTH_SHORT).show();
+
+                return true;
             }
         });
     }
