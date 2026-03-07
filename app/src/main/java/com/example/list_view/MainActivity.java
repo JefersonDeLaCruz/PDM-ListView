@@ -1,5 +1,6 @@
 package com.example.list_view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etNombreDepa, etCodigo;
     private Button btnAgregar;
+
+
+
+    private Button btnSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,16 @@ public class MainActivity extends AppCompatActivity {
                 agregarDepartamento();
             }
         });
+
+
+
+        btnSpinner = findViewById(R.id.btnSpinner);
+
+        btnSpinner.setOnClickListener(v -> {
+
+            openSpinnerActivity();
+
+        });
     }
 
     private void agregarDepartamento() {
@@ -85,5 +100,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Por favor completa ambos campos", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void openSpinnerActivity(){
+        Intent intent = new Intent(this, spinnerActivity.class);
+
+        startActivity(intent);
     }
 }
