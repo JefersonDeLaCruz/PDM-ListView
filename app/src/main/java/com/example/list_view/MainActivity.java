@@ -1,5 +1,6 @@
 package com.example.list_view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etNombreDepa, etCodigo;
     private Button btnAgregar;
+
+    private Button btnOpenSpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
                 agregarDepartamento();
             }
         });
+
+        btnOpenSpinner = findViewById(R.id.btnSpinner);
+
+        //esta vez el evento click se lo asignare desde el xml
+
+
+
     }
 
     private void agregarDepartamento() {
@@ -85,5 +96,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Por favor completa ambos campos", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void goTo2ndView(View view){
+        Intent intent = new Intent(this, SpinnerActivity.class);
+        startActivity(intent);
     }
 }
