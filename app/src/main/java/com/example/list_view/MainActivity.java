@@ -1,5 +1,7 @@
 package com.example.list_view;
 
+import android.app.jank.RelativeFrameTimeHistogram;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -56,34 +58,36 @@ public class MainActivity extends AppCompatActivity {
         listDepartamentos.setAdapter(data);
 
         // 5. Configurar el evento Click del botón
-        btnAgregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnAgregar.setOnClickListener(v ->  {
                 agregarDepartamento();
-            }
         });
     }
 
     private void agregarDepartamento() {
-        String nombre = etNombreDepa.getText().toString().trim();
-        String codigo = etCodigo.getText().toString().trim();
 
-        if (!nombre.isEmpty() && !codigo.isEmpty()) {
-            // Crear el nuevo objeto
-            Departamento nuevoDepa = new Departamento(nombre, codigo);
+//        String nombre = etNombreDepa.getText().toString().trim();
+//        String codigo = etCodigo.getText().toString().trim();
+//
+//        if (!nombre.isEmpty() && !codigo.isEmpty()) {
+//            // Crear el nuevo objeto
+//            Departamento nuevoDepa = new Departamento(nombre, codigo);
+//
+//            // Agregar a la lista de datos
+//            listDepartamentosData.add(nuevoDepa);
+//
+//            // Notificar al adaptador que los datos cambiaron para refrescar la UI
+//            data.notifyDataSetChanged();
+//
+//            // Limpiar los campos de texto
+//            etNombreDepa.setText("");
+//            etCodigo.setText("");
+//            etNombreDepa.requestFocus();
+//        } else {
+//            Toast.makeText(this, "Por favor completa ambos campos", Toast.LENGTH_SHORT).show();
+//        }
 
-            // Agregar a la lista de datos
-            listDepartamentosData.add(nuevoDepa);
+        Intent intent = new Intent(MainActivity.this, SpinnerActivity.class);
 
-            // Notificar al adaptador que los datos cambiaron para refrescar la UI
-            data.notifyDataSetChanged();
-
-            // Limpiar los campos de texto
-            etNombreDepa.setText("");
-            etCodigo.setText("");
-            etNombreDepa.requestFocus();
-        } else {
-            Toast.makeText(this, "Por favor completa ambos campos", Toast.LENGTH_SHORT).show();
-        }
+        startActivity(intent);
     }
 }
