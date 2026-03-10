@@ -1,4 +1,4 @@
-package com.example.list_view.Models;
+package com.example.list_view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,11 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
+import com.example.list_view.Models.Producto;
 
 import java.util.ArrayList;
-import java.util.zip.CheckedOutputStream;
 
 public class AdapterProducto extends BaseAdapter {
 
@@ -46,10 +46,47 @@ public class AdapterProducto extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-//        RecyclerView.ViewHolder holder;
+        ViewHolder holder;
+
+        if (convertView == null  ) {
+
+        convertView = inflater.inflate(R.layout.custom_producto, parent, false);
+        holder = new ViewHolder();
+
+        holder.imagen = convertView.findViewById(R.id.imgProducto);
+        holder.txtNombre = convertView.findViewById(R.id.txtNombre);
+        holder.txtPrecio = convertView.findViewById(R.id.txtPrecio);
+        holder.btnEliminar = convertView.findViewById(R.id.btnEliminar);
+        holder.btnAddCart = convertView.findViewById(R.id.btnAddCart);
+
+        convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
+        }
 
 
-        return null;
+        Producto pr = listaProductos.get(position);
+
+        holder.txtNombre.setText(pr.getNombre());
+        holder.txtPrecio.setText(String.valueOf(pr.getPrecio()));
+        holder.imagen.setImageResource(pr.getImagen());
+
+        holder.btnEliminar.setOnClickListener(v -> {
+            listaProductos.remove(position);
+            notifyDataSetChanged();
+            Toast.makeText(context, "Eliminado: " + pr.getNombre(), Toast.LENGTH_SHORT).show();
+        });
+
+        holder.btnAddCart.setOnClickListener(v -> {
+            // Feedback visual: pequeña animacion de escala
+            v.animate().scaleX(1.2f).scaleY(1.2f).setDuration(100).withEndAction(() -> {
+                v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
+            }).start();
+            
+            Toast.makeText(context, "Agregado al carrito: " + pr.getNombre() + " ($" + pr.getPrecio() + ")", Toast.LENGTH_SHORT).show();
+        });
+
+        return convertView;
     }
 
     static class ViewHolder{

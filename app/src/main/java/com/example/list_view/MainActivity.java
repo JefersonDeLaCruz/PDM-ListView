@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText etNombreDepa, etCodigo;
     private Button btnAgregar;
 
+    private Button btnCustom;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
         // 5. Configurar el evento Click del botón
         btnAgregar.setOnClickListener(v ->  {
                 agregarDepartamento();
+        });
+
+        btnCustom = findViewById(R.id.btnCustom);
+
+        btnCustom.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CustomActivity.class);
+
+            startActivity(intent);
         });
     }
 

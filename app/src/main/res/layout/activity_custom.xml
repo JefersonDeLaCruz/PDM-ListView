@@ -7,4 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".CustomActivity">
 
+    <ListView
+        android:id="@+id/lvPr"
+        android:layout_width="409dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="41dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
