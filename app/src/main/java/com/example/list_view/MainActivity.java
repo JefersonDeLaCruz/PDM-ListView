@@ -1,5 +1,6 @@
 package com.example.list_view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -65,25 +66,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void agregarDepartamento() {
-        String nombre = etNombreDepa.getText().toString().trim();
-        String codigo = etCodigo.getText().toString().trim();
-
-        if (!nombre.isEmpty() && !codigo.isEmpty()) {
-            // Crear el nuevo objeto
-            Departamento nuevoDepa = new Departamento(nombre, codigo);
-
-            // Agregar a la lista de datos
-            listDepartamentosData.add(nuevoDepa);
-
-            // Notificar al adaptador que los datos cambiaron para refrescar la UI
-            data.notifyDataSetChanged();
-
-            // Limpiar los campos de texto
-            etNombreDepa.setText("");
-            etCodigo.setText("");
-            etNombreDepa.requestFocus();
-        } else {
-            Toast.makeText(this, "Por favor completa ambos campos", Toast.LENGTH_SHORT).show();
-        }
+//        String nombre = etNombreDepa.getText().toString().trim();
+//        String codigo = etCodigo.getText().toString().trim();
+//
+//        if (!nombre.isEmpty() && !codigo.isEmpty()) {
+//            // Crear el nuevo objeto
+//            Departamento nuevoDepa = new Departamento(nombre, codigo);
+//
+//            // Agregar a la lista de datos
+//            listDepartamentosData.add(nuevoDepa);
+//
+//            // Notificar al adaptador que los datos cambiaron para refrescar la UI
+//            data.notifyDataSetChanged();
+//
+//            // Limpiar los campos de texto
+//            etNombreDepa.setText("");
+//            etCodigo.setText("");
+//            etNombreDepa.requestFocus();
+//        } else {
+//            Toast.makeText(this, "Por favor completa ambos campos", Toast.LENGTH_SHORT).show();
+//        }
+        Intent intent = new Intent(this, practica.class);
+        startActivity(intent);
     }
 }
