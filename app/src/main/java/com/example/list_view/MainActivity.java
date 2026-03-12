@@ -2,9 +2,6 @@ package com.example.list_view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,7 +10,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -64,23 +60,8 @@ public class MainActivity extends AppCompatActivity {
         // 4. Asignar el adaptador al ListView
         listDepartamentos.setAdapter(data);
 
-        // --- ELIMINAR SIN CUSTOM ADAPTER (USANDO LONG CLICK) ---
-        listDepartamentos.setOnItemLongClickListener((parent, view, position, id) -> {
-            Departamento seleccionado = listDepartamentosData.get(position);
+        // TODO: IMPLEMENTAR ELIMINACIÓN POR LONG CLICK AQUÍ
 
-            new AlertDialog.Builder(this)
-                    .setTitle("Eliminar registro")
-                    .setMessage("¿Deseas eliminar a " + seleccionado.getNombreDepa() + "?")
-                    .setPositiveButton("Eliminar", (dialog, which) -> {
-                        listDepartamentosData.remove(position);
-                        data.notifyDataSetChanged();
-                        Toast.makeText(this, "Eliminado", Toast.LENGTH_SHORT).show();
-                    })
-                    .setNegativeButton("Cancelar", null)
-                    .show();
-
-            return true; // Importante: retorna true para que no se dispare el onClick normal
-        });
 
         // 5. Configurar el evento Click del botón
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -90,30 +71,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // --- NUEVA VALIDACIÓN EN TIEMPO REAL ---
-        
-        // Limitamos a 9 caracteres (xxxx-xxxx)
-        etCodigo.setFilters(new InputFilter[] { new InputFilter.LengthFilter(9) });
+        // TODO: IMPLEMENTAR VALIDACIÓN EN TIEMPO REAL (TEXTWATCHER) AQUÍ
 
-        etCodigo.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String currentText = s.toString();
-                String regex = "^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$";
-                
-                if (currentText.matches(regex)) {
-                    // Si el patrón está completo y es válido
-                    etCodigo.setError(null);
-                    Toast.makeText(MainActivity.this, "¡Código completo!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
 
         btnSpinner = findViewById(R.id.btnSpinner);
 
@@ -134,28 +93,22 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Validación final
-        String regex = "^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$";
+        // TODO: IMPLEMENTAR VALIDACIÓN DE PATRON XXXX-XXXX AQUÍ
 
-        if (codigo.matches(regex)) {
-            // Crear el nuevo objeto
-            Departamento nuevoDepa = new Departamento(nombre, codigo);
+        // Crear el nuevo objeto
+        Departamento nuevoDepa = new Departamento(nombre, codigo);
 
-            // Agregar a la lista de datos
-            listDepartamentosData.add(nuevoDepa);
+        // Agregar a la lista de datos
+        listDepartamentosData.add(nuevoDepa);
 
-            // Notificar al adaptador que los datos cambiaron para refrescar la UI
-            data.notifyDataSetChanged();
+        // Notificar al adaptador que los datos cambiaron para refrescar la UI
+        data.notifyDataSetChanged();
 
-            // Limpiar los campos de texto
-            etNombreDepa.setText("");
-            etCodigo.setText("");
-            etNombreDepa.requestFocus();
-            Toast.makeText(this, "Departamento agregado con éxito", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "El código debe tener el formato xxxx-xxxx", Toast.LENGTH_LONG).show();
-            etCodigo.setError("Formato inválido");
-        }
+        // Limpiar los campos de texto
+        etNombreDepa.setText("");
+        etCodigo.setText("");
+        etNombreDepa.requestFocus();
+        Toast.makeText(this, "Departamento agregado con éxito", Toast.LENGTH_SHORT).show();
     }
 
     private void openSpinnerActivity(){
