@@ -1,6 +1,7 @@
 package com.example.list_view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,7 @@ public class spinnerActivity extends AppCompatActivity {
             return insets;
         });
 
+        Log.i("ON_CREATE", "AVLA QE JOPA");
 
         spDepartamentos = findViewById(R.id.spDepartamentos);
 
@@ -45,10 +47,10 @@ public class spinnerActivity extends AppCompatActivity {
         departamentos.add(new Departamento ("nayma", "123"));
 
 
-        ArrayAdapter<Departamento> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, departamentos);
+        ArrayAdapter<Departamento> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, departamentos);
 
 
-        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+//        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
 
         spDepartamentos.setAdapter(adapter);
 
