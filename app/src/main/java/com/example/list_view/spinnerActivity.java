@@ -58,8 +58,7 @@ public class spinnerActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Departamento dp = (Departamento) parent.getItemAtPosition(position);
 
-                Toast.makeText(spinnerActivity.this , String.format("Nombre: %s \nCodigo: %s", dp.getNombreDepa(), dp.getCodigo()), Toast.LENGTH_SHORT ).show();
-
+                Toast.makeText(spinnerActivity.this, String.format("Sleccionaste: %s\nCon codigo: %s", dp.getNombreDepa(), dp.getCodigo()), Toast.LENGTH_SHORT).show();
             }
 
             @Override
