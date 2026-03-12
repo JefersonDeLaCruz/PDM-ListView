@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.list_view.Models.Departamento;
 import com.example.list_view.Models.Producto;
 
 import java.util.ArrayList;
@@ -78,12 +79,23 @@ public class AdapterProducto extends BaseAdapter {
         });
 
         holder.btnAddCart.setOnClickListener(v -> {
-            // Feedback visual: pequeña animacion de escala
+            // Creamos el nuevo departamento basado en el producto
+            Departamento nuevoDepa = new Departamento(pr.getNombre(), String.valueOf(pr.getPrecio()));
+            
+            // Lo agregamos a la lista estática de SpinnerActivity
+            SpinnerActivity.dps.add(nuevoDepa);
+            
+            // Si el adaptador ya existe, notificamos el cambio
+            if (SpinnerActivity.adapter != null) {
+                SpinnerActivity.adapter.notifyDataSetChanged();
+            }
+
+            Toast.makeText(context, "Producto enviado a la lista de departamentos!", Toast.LENGTH_SHORT).show();
+            
+            // Animacion feedback
             v.animate().scaleX(1.2f).scaleY(1.2f).setDuration(100).withEndAction(() -> {
                 v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
             }).start();
-            
-            Toast.makeText(context, "Agregado al carrito: " + pr.getNombre() + " ($" + pr.getPrecio() + ")", Toast.LENGTH_SHORT).show();
         });
 
         return convertView;

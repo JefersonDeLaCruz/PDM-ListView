@@ -19,6 +19,10 @@ import java.util.ArrayList;
 
 public class SpinnerActivity extends AppCompatActivity {
 
+    // Hacemos la lista y el adaptador estáticos para poder acceder desde el otro Activity/Adapter
+    public static ArrayList<Departamento> dps = new ArrayList<>();
+    public static ArrayAdapter<Departamento> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,25 +36,21 @@ public class SpinnerActivity extends AppCompatActivity {
 
         lvData = findViewById(R.id.lvData);
 
-        dps = new ArrayList<>();
+        // Solo inicializamos si la lista está vacía (para no perder lo que agregamos desde el carrito)
+        if (dps.isEmpty()) {
+            dps.add(new Departamento("messi", "67"));
+            dps.add(new Departamento("hola", "67"));
+            dps.add(new Departamento("que tal", "67"));
+            dps.add(new Departamento("mundo", "67"));
+        }
 
-        dps.add(new Departamento("messi", "67"));
-        dps.add(new Departamento("hola", "67"));
-        dps.add(new Departamento("que tal", "67"));
-        dps.add(new Departamento("mundo", "67"));
-
-
-        //armar contexto
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dps);
-
         lvData.setAdapter(adapter);
 
         lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 Departamento dp = (Departamento) parent.getItemAtPosition(position);
-
                 Toast.makeText(SpinnerActivity.this,
                         String.format("Departamento: %s\nCodigo del depa mi pa: %s", dp.getNombreDepa(), dp.getCodigo()),
                         Toast.LENGTH_SHORT).show();
@@ -58,11 +58,5 @@ public class SpinnerActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<Departamento> dps;
     private ListView lvData;
-
-    private ArrayAdapter<Departamento> adapter;
-
-
-
 }
